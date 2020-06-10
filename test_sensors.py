@@ -14,8 +14,11 @@ except ImportError:
 
 ##LTR559 light
 
-import ltr559 
-
+try:
+    from ltr559 import LTR559
+except ImportError:
+    import ltr559
+    
  ### GET DATA 
 # Get the temperature of the CPU for compensation
 def get_cpu_temperature():

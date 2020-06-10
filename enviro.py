@@ -1,6 +1,5 @@
 import sys
 import time
-import loggin 
 
 ##BME280 weather sensor
 
@@ -22,7 +21,7 @@ except ImportError:
 class enviro():
 
     factor          = 2.5
-    cpu_temps       = [get_cpu_temperature()] * 5
+    
     bus             = SMBus(1)
     bme280          = BME280(i2c_dev=bus)
     ltr559          = LTR559()
@@ -35,6 +34,8 @@ class enviro():
             temp = int(temp) / 1000.0
         return temp
 
+    cpu_temps       = [self.get_cpu_temperature()] * 5
+    
     def get_weather(self):
 
         cpu_temp = self.get_cpu_temperature()
