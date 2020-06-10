@@ -18,10 +18,10 @@ sensors     = enviro()
 
 try:
     while True:
-        records = mongoDB.records
+        records = database.records
         sensorsData = sensors.get_all_sensors_data()
 
-        mongoDB.exportData(sensorsData, records)
+        database.exportData(sensorsData, records)
         time.sleep(60)
 
 except KeyboardInterrupt:
