@@ -6,7 +6,7 @@ class mongoDB():
         self.myDB       = "mongodb+srv://pi:N0tT0Kn0w@cluster0-wegmd.mongodb.net/test?retryWrites=true&w=majority"
         self.DBclient   = MongoClient(self.myDB)
         self.db         = self.DBclient.get_database('sensors_db')
-        self.records    = db.sensors_record
+        self.records    = self.db.sensors_record
 
     # def getCollection(self):  
     #     # Be carefull by writing the exact name of the collection. 
