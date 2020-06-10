@@ -1,9 +1,28 @@
-
-
 from mongoDB import mongoDB
+from enviro import enviro
 
-## TO DO:
+import time
+import sys
 
-#Create a dict using Enviro readings
-    # Return variables from Enviro get_all_sensors()
-    
+#### SUPER TO DO:
+
+##Create MongoDB class
+##Create a dict using Enviro readings by returning variables from Enviro get_all_sensors_data()
+# Test code
+# Clean code
+# check Mongo
+# Data analysis
+
+database    = mongoDB()
+sensors     = enviro()
+
+try:
+    while True:
+        records = mongoDB.getCollection()
+        sensorsData = sensors.get_all_sensors_data()
+
+        mongoDB.exportData(sensorsData, records)
+        time.sleep(60)
+        
+except KeyboardInterrupt:
+    sys.exit(0)

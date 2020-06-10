@@ -55,4 +55,19 @@ class enviro():
         #proximity      = ltr559.getproximity()
         return lux 
 
-    
+    def get_all_sensors_data(self):
+        # while True:
+            temp, press, hum = self.get_weather()
+            lux = self.get_light()
+
+            payload = {
+                'timestamp': time.time(),
+                'data': {
+                    'temeprature': temp,
+                    'pressure': press,
+                    'humidity' : hum, 
+                    'light': lux
+                }
+            }
+
+
