@@ -22,7 +22,7 @@ try:
         sensorsData = sensors.get_all_sensors_data()
 
         database.exportData(sensorsData, records)
-        time.sleep(60)
+        time.sleep(900)
 
 except KeyboardInterrupt:
     sys.exit(0)
