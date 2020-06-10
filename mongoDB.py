@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import dnspython 
 
 class mongoDB():
 

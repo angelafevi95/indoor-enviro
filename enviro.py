@@ -21,8 +21,6 @@ except ImportError:
 class enviro():
 
     def __init__(self):
-        super().__init__()
-
         self.factor          = 2.5
         self.cpu_temps       = [self.get_cpu_temperature()] * 5
         self.bus             = SMBus(1)

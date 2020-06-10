@@ -1,7 +1,6 @@
 
 import sys
 import time
-import loggin 
 
 ##BME280 weather sensor
 
@@ -18,7 +17,7 @@ try:
     from ltr559 import LTR559
 except ImportError:
     import ltr559
-    
+
  ### GET DATA 
 # Get the temperature of the CPU for compensation
 def get_cpu_temperature():
