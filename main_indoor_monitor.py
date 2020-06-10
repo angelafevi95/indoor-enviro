@@ -18,7 +18,7 @@ sensors     = enviro()
 
 try:
     while True:
-        records = mongoDB.getCollection()
+        records = mongoDB.records
         sensorsData = sensors.get_all_sensors_data()
 
         mongoDB.exportData(sensorsData, records)
