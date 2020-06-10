@@ -23,6 +23,6 @@ try:
 
         mongoDB.exportData(sensorsData, records)
         time.sleep(60)
-        
+
 except KeyboardInterrupt:
     sys.exit(0)

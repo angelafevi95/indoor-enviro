@@ -3,13 +3,14 @@ from pymongo import MongoClient
 class mongoDB():
 
     def __init__(self):
-        self.myDB = "mongodb+srv://pi:N0tT0Kn0w@cluster0-wegmd.mongodb.net/test?retryWrites=true&w=majority"
-        self.DBclient = MongoClient(self.myDB)
-        self.db = self.DBclient.get_database('sensors_db')
+        self.myDB       = "mongodb+srv://pi:N0tT0Kn0w@cluster0-wegmd.mongodb.net/test?retryWrites=true&w=majority"
+        self.DBclient   = MongoClient(self.myDB)
+        
 
     def getCollection(self):  
         # Be carefull by writing the exact name of the collection. 
-        records = self.db.sensors_record
+        db              = self.DBclient.get_database('sensors_db')
+        records         = db.sensors_record
         return records   
 
     ## To check the count of documents I have currently in my collection
