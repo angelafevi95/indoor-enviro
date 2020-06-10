@@ -11,51 +11,48 @@ try:
 except ImportError:
     from smbus import SMBus
 
-##LTR559 light
-
-import ltr559 
-
- ### GET DATA 
-# Get the temperature of the CPU for compensation
-def get_cpu_temperature():
-    with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
-        temp = f.read()
-        temp = int(temp) / 1000.0
-    return temp
-
-#Tuning factor for compensation
-factor= 2.5 
-cpu_temps = [get_cpu_temperature()] * 5
-
 try:
-    while True:
+    from ltr559 import LTR559
+except ImportError:
+    import ltr559
 
-        ##BME280 weather sensor
-        bus             = SMBus(1)
-        bme280          = BME280(i2c_dev=bus)
 
-        # temperature     = bme280.get_temperature()
-        cpu_temp = get_cpu_temperature()
+## Pimori Enviro object: temperature, humidity, pressure, light
+
+class enviro():
+
+    factor          = 2.5
+    cpu_temps       = [get_cpu_temperature()] * 5
+    bus             = SMBus(1)
+    bme280          = BME280(i2c_dev=bus)
+    ltr559          = LTR559()
+
+    # Get the temperature of the CPU for compensation
+    
+    def get_cpu_temperature(self):
+        with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
+            temp = f.read()
+            temp = int(temp) / 1000.0
+        return temp
+
+    def get_weather(self):
+
+        cpu_temp = self.get_cpu_temperature()
         # Smooth out with some averaging to decrease jitter
-        cpu_temps = cpu_temps[1:] + [cpu_temp]
-        avg_cpu_temp = sum(cpu_temps) / float(len(cpu_temps))
+        self.cpu_temps = self.cpu_temps[1:] + [self.cpu_temp]
+        avg_cpu_temp = sum(self.cpu_temps) / float(len(self.cpu_temps))
         raw_temp = bme280.get_temperature()
-        comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / factor)
+        comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / self.factor)
 
         pressure        = bme280.get_pressure()
         humidity        = bme280.get_humidity()
 
-        print("Temperature", comp_temp)
-        print("Pressure", pressure)
-        print("Humidity", humidity)
+        return comp_temp, pressure, humidity
 
-        ##LTR559 light
+    def get_light(self):
+
         lux             = ltr559.get_lux()
         #proximity      = ltr559.getproximity()
+        return lux 
 
-        print("Lux", lux)
-
-
-except KeyboardInterrupt:
-    sys.exit(0)
-
+    
