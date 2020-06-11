@@ -15,6 +15,7 @@ try:
 except ImportError:
     import ltr559
 
+from datetime import datetime
 
 ## Pimori Enviro object: temperature, humidity, pressure, light
 
@@ -46,8 +47,8 @@ class enviro():
 
         pressure        = self.bme280.get_pressure()
         humidity        = self.bme280.get_humidity()
-
-        return comp_temp, pressure, humidity
+        
+        return comp_temp, raw_temp, pressure, humidity
 
     def get_light(self):
 
@@ -56,13 +57,14 @@ class enviro():
         return lux 
 
     def get_all_sensors_data(self):
-        temp, press, hum = self.get_weather()
+        comp_temp, raw_temp, press, hum = self.get_weather()
         lux = self.get_light()
 
         payload = {
             'timestamp': time.time(),
             'data': {
-                'temeprature': temp,
+                'comp temeprature': comp_temp,
+                'tempeparute':raw_temp,
                 'pressure': press,
                 'humidity' : hum, 
                 'light': lux

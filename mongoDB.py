@@ -1,5 +1,8 @@
 from pymongo import MongoClient
 
+##To check:
+# https://www.mongodb.com/presentations/best-practices-for-working-with-iot-and-time-series-data
+
 class mongoDB():
 
     def __init__(self):
