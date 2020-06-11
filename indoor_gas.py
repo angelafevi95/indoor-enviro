@@ -13,7 +13,7 @@ try:
         gasPayload = mq.MQallPercentage(gasData)
 
         database.exportData(gasPayload, records)
-        time.sleep(10)
+        time.sleep(900)
 
 except KeyboardInterrupt:
     sys.exit(0)
