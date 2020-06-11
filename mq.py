@@ -58,18 +58,14 @@ class MQ():
         val["SMOKE"]    = self.MQGetGasPercentage(read/self.Ro, self.GAS_SMOKE)
         return val
 
-    def MQallPercentage(self):
-        read     = self.MQRead(self.MQ_PIN)
-        lpg      = self.MQGetGasPercentage(read/self.Ro, self.GAS_LPG)
-        co       = self.MQGetGasPercentage(read/self.Ro, self.GAS_CO)
-        smoke    = self.MQGetGasPercentage(read/self.Ro, self.GAS_SMOKE)
-        
+    def MQallPercentage(self, val):
+    
         payload = {
             'timestamp': time.time(),
             'gasData': {
-                'LPG': lpg,
-                'CO': co,
-                'SMOKE': smoke
+                'LPG': val["GAS_LPG"],
+                'CO': val["CO"],
+                'SMOKE': val["SMOKE"]
             }
         }
         return payload

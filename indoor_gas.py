@@ -9,9 +9,10 @@ mq = MQ()
 try:
     while True:
         records = database.records
-        gasData =mq.MQallPercentage()
+        gasData =mq.MQPercentage()
+        gasPayload = mq.MQallPercentage(gasData)
 
-        database.exportData(gasData, records)
+        database.exportData(gasPayload, records)
         time.sleep(10)
 
 except KeyboardInterrupt:
