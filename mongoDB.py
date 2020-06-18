@@ -6,10 +6,12 @@ from pymongo import MongoClient
 class mongoDB():
 
     def __init__(self):
+
+        ## URL to connect Python API to MongoDB Atlas 
         self.myDB       = "mongodb+srv://pi:N0tT0Kn0w@cluster0-wegmd.mongodb.net/test?retryWrites=true&w=majority"
         self.DBclient   = MongoClient(self.myDB)
         self.db         = self.DBclient.get_database('sensors_db')
-        self.records    = self.db.sensors_record
+        self.records    = self.db.Angela_DB
 
     # def getCollection(self):  
     #     # Be carefull by writing the exact name of the collection. 

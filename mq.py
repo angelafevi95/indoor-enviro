@@ -4,6 +4,7 @@
 import time
 import math
 from MCP3008 import MCP3008
+import datetime
 
 class MQ():
 
@@ -61,6 +62,7 @@ class MQ():
     def MQallPercentage(self, val):
     
         payload = {
+            'datetime': datetime.fromtimestamp(time.time()),
             'timestamp': time.time(),
             'gasData': {
                 'LPG': val["GAS_LPG"],

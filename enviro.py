@@ -1,5 +1,6 @@
 import sys
 import time
+import datetime
 
 ##BME280 weather sensor
 
@@ -61,6 +62,7 @@ class enviro():
         lux = self.get_light()
 
         payload = {
+            'datetime': datetime.fromtimestamp(time.time()),
             'timestamp': time.time(),
             'data': {
                 'comp temeprature': comp_temp,
