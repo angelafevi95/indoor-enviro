@@ -5,6 +5,31 @@ from pymongo import MongoClient
 
 class mongoDB():
 
+    """
+This class is defined to manage MongoDB Atlas access and data. 
+
+Atributes: 
+    #   Variables:
+
+    * myDB: 
+    As per provider descrption DataBase URL format depends on the Python verssion used and it purpose. 
+    In this case, at least Python 3.6 should be used. 
+
+    * DBCLient:
+    Pymongo object used to connect myDB
+
+    * DB: 
+    DataBase selected among the existing ones on the cluster. 
+
+    * Records: 
+    Once the DB is selected, we choose the record per USER. This way we do not mix up information related to different users.
+
+     #  Funtions: 
+
+
+
+    """
+
     def __init__(self):
 
         ## URL to connect Python API to MongoDB Atlas 
@@ -13,11 +38,11 @@ class mongoDB():
         self.db         = self.DBclient.get_database('sensors_db')
         self.records    = self.db.Angela_DB
 
-    # def getCollection(self):  
-    #     # Be carefull by writing the exact name of the collection. 
-    #     db              = self.DBclient.get_database('sensors_db')
-    #     records         = db.sensors_record
-    #     return records   
+    def getCollection(self):  
+        # Be carefull by writing the exact name of the collection. 
+        db              = self.DBclient.get_database('sensors_db')
+        records         = db.sensors_record
+        return records   
 
     ## To check the count of documents I have currently in my collection
     def getCountDocs(self, records):
@@ -41,8 +66,7 @@ class mongoDB():
     ## Create a def on main() RPI to create a dictionary using the information provided by the sensors. 
     def exportData(self, dicctionary, records):
         records.insert_one(dicctionary)
-        # Si uso records.insert_many(dictList) exporto casa diccionario dentro de la lista como un nuevo document. 
-        # Es mejor, para un dia envira un diccionario de listas y no una lisya de diccionarios ej: "mq2' = 3,4,4 "
+        
         
 
 

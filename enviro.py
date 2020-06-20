@@ -22,6 +22,26 @@ from datetime import datetime
 
 class enviro():
 
+
+    """
+This class is defined to manage MongoDB Atlas access and data. 
+
+Atributes: 
+    * baseURL:
+    URL needed to access MongoDB Atlas Cloud. Cluster should be created beforehand. 
+    * myDB: 
+    As per provider descrption DataBase URL format depends on the Python verssion used and it purpose. 
+    In this case, at least Python 3.6 should be used. 
+
+    Funtions: 
+
+    * auth: 
+    Input params: none
+    Output params: none
+
+
+    """
+    
     def __init__(self):
         self.factor          = 2.5
         self.cpu_temps       = [self.get_cpu_temperature()] * 5
