@@ -1,0 +1,11 @@
+sys
+time
+datetime
+bme280
+smbus2
+smbus
+ltr559
+spidev
+math
+pymongo
+dnspython

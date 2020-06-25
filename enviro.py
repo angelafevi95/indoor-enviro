@@ -1,6 +1,5 @@
 import sys
 import time
-import datetime
 
 ##BME280 weather sensor
 
@@ -24,21 +23,44 @@ class enviro():
 
 
     """
-This class is defined to manage MongoDB Atlas access and data. 
+This class is defined to manage Enviro Module. 
 
 Atributes: 
-    * baseURL:
-    URL needed to access MongoDB Atlas Cloud. Cluster should be created beforehand. 
-    * myDB: 
-    As per provider descrption DataBase URL format depends on the Python verssion used and it purpose. 
-    In this case, at least Python 3.6 should be used. 
+    * factor: 
+    Used to regulate temperature measures depending on CPU temperature. 
+    * cpu_temps:
+    Gets CPU temperature value from RPi.
+    *bus: 
+    Creates an object to communicate via I2C with BME280 sensor
+    *BME280: 
+    Weather object to measure temperature, humidity, preassure
+    *LTR559:
+    Light object to measure lux. 
 
     Funtions: 
 
-    * auth: 
-    Input params: none
-    Output params: none
+    * get_cpu_temperature: 
+    INPUT: none
+    OUTPUT: CPU temperature (Celsius)
+    * get_weather:
+    INPUT: none
+    OUTPUT: compensated temperature, temperature, preassure, humidity
+    Uses:
+        functions: get_cpu_temperature()
+        objects: BME280, factor
+    * get_light:
+    INPUT: none
+    OUTPUT: lux measures
+    Uses: 
+        functions: none
+        objects: LTR559
 
+    *get_all_sensors_data:
+    INPUT: none
+    OUTPUT: dicctionay called 'payload' containing the resutls of the measures performed
+    Uses:
+        functions: get_weather(), get_light(), time.time()
+        
 
     """
     
@@ -48,8 +70,6 @@ Atributes:
         self.bus             = SMBus(1)
         self.bme280          = BME280(i2c_dev=self.bus)
         self.ltr559          = LTR559()
-
-    # Get the temperature of the CPU for compensation
     
     def get_cpu_temperature(self):
         with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:

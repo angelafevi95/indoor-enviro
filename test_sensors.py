@@ -2,6 +2,9 @@
 import sys
 import time
 
+
+### The aim of this scripts is using it for testing it. It getsweather values and shows them on the terminal. 
+
 ##BME280 weather sensor
 
 from bme280 import BME280

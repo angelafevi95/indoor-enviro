@@ -4,6 +4,12 @@ from enviro import enviro
 import time
 import sys
 
+"""
+This scripts requieres the addition of mongoDB and enviro objects.
+It uses the weather measures obtained from the sensors and uploads it into MongoDB Atlas collection. 
+
+"""
+
 database    = mongoDB()
 sensors     = enviro()
 

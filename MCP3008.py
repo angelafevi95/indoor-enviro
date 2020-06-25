@@ -1,5 +1,7 @@
 from spidev import SpiDev
 
+## MCP3308 libray. Analog to Digital converter. 
+
 class MCP3008:
     def __init__(self, bus = 0, device = 0):
         self.bus, self.device = bus, device

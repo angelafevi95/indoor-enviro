@@ -25,8 +25,21 @@ Atributes:
     Once the DB is selected, we choose the record per USER. This way we do not mix up information related to different users.
 
      #  Funtions: 
+    * getcollection:
+    INPUT: none
+    OUTPUT: Given a chosen Database returns a collection. 
 
+    * getCountDocs:
+    INPUT: collection name
+    OUTPUT: Number of existing documents in a collection
+    
+    * importData: 
+    INPUT: collection name
+    OUTPUT: a lists containing all the documents of the collection at a time
 
+    * exportData:
+    INPUT: dictionary to be added to a collection, collection name
+    OUTPUT: none 
 
     """
 
@@ -44,28 +57,26 @@ Atributes:
         records         = db.sensors_record
         return records   
 
-    ## To check the count of documents I have currently in my collection
     def getCountDocs(self, records):
-        # We can provide a filter or not insede de {}
+        # We can provide a filter or not inside de {}
         count =  records.count_documents({})
         return count 
     
-    ## Get all the documents of the collection at a time
     def importData(self, records):
         list(records.find())
+
+    def exportData(self, dicctionary, records):
+        records.insert_one(dicctionary)
     
     # ## Get one document of the collection by filtering per key
     # def importDataKey(self, records):
     #     records.find_one({'key': value})
 
-
     ##Push data to MondoDB
     # def updateDocument(self, records):
         ##Funtion used to modify an entry on an existing Document 
 
-    ## Create a def on main() RPI to create a dictionary using the information provided by the sensors. 
-    def exportData(self, dicctionary, records):
-        records.insert_one(dicctionary)
+
         
         
 
