@@ -30,7 +30,8 @@ class miband():
                 month.append(payload)
 
         return month
-
+    # https://realpython.com/python-csv/
+    
     def getSleepHours(self, start, stop):
         sleepSeconds = stop-start
         sleepHours   =         # transform from time stamp
