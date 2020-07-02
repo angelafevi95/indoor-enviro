@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Indoor monitoring
 
 This project contains the necessary scripts to generate documents and upload them on MongoDB Atlas. 
@@ -46,3 +47,6 @@ Finally, we need to use the following lines to measure the enviromental values c
 
 Angela Fernandez Vilches  | Universidad de Granada | Trabajo Fin de Grado|
 Diseño de nodos inalámbricos para la monitorización de las condiciones ambientales de trabajo | 2020 
+=======
+# indoor-enviro
+>>>>>>> f8de5c2878293cc4eea0864d08722707aab1640f
