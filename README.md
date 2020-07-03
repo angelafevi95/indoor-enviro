@@ -28,6 +28,7 @@ Below can be found a list of the existing scripts contained in this project:
     -- Requierements: MCP3008.py, mq.py and mongoDB.py objects.
 - main_indoor_monitor.py: uses Pimoroni Enviro weather values to create a MongoDB document
     -- Requierements: enviro.py and mongoDB.py
+- miband.py: gets user sleep info.
 
 
 ## Installation and usage
@@ -42,6 +43,9 @@ Finally, we need to use the following lines to measure the enviromental values c
 >> python main_indoor_monitor.py
 >> python3 indoor_gas.py
 
+When it is needed to upload sleep information on MongoDB we need to:
+
+>> python3 miband.py
 
 ---------------------
 

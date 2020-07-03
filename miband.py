@@ -1,5 +1,7 @@
 import csv
 import math 
+from datetime import datetime 
+from mongoDB import mongoDB
 
 ## CSV Information about the monitored user. 
 userData = 'SLEEP_USER1.csv'
@@ -7,11 +9,11 @@ userData = 'SLEEP_USER1.csv'
 class miband(): 
 
     def read_sleep_info(self):
+
+        month = []
         with open(userData, mode='r') as csv_file:
             csv_reader = csv.DictReader(csv_file)
             line_count = 0
-
-            month = []
 
             for day in csv_reader:
                 if line_count == 0:
@@ -19,7 +21,7 @@ class miband():
                     line_count = +1
 
                 payload = {
-                    'datetime': day["date"],
+                    'datetimeSleep': day["date"],
                     'data': {
                         'sleepHours': self.getSleepHours(day["start"], day["stop"]),
                         'deepSleepHours': day["deepSleepTime"]/60,
@@ -29,15 +31,19 @@ class miband():
 
                 month.append(payload)
 
-        return month
-    # https://realpython.com/python-csv/
-    
+                
+      return month
+
     def getSleepHours(self, start, stop):
         sleepSeconds = stop-start
-        sleepHours   =         # transform from time stamp
-
+        sleepHours   =  datetime.fromtimestamp(sleepSeconds)    
+    
         return sleepHours 
 
-mibandata = miband()
 
-mibandata.read_sleep_info()
+mibandata = miband()
+database  = mongoDB()
+
+monthlyInfo = mibandata.read_sleep_info()
+records = database.records
+database.exportData(monthlyInfo, records)
