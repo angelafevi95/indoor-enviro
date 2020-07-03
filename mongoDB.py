@@ -1,7 +1,5 @@
 from pymongo import MongoClient
 
-##To check:
-# https://www.mongodb.com/presentations/best-practices-for-working-with-iot-and-time-series-data
 
 class mongoDB():
 
@@ -49,7 +47,8 @@ Atributes:
         self.myDB       = "mongodb+srv://pi:N0tT0Kn0w@cluster0-wegmd.mongodb.net/test?retryWrites=true&w=majority"
         self.DBclient   = MongoClient(self.myDB)
         self.db         = self.DBclient.get_database('sensors_db')
-        self.records    = self.db.Angela_DB
+        # self.records    = self.db.Angela_DB
+        self.records    = self.db.sleep_record
 
     def getCollection(self):  
         # Be carefull by writing the exact name of the collection. 
@@ -72,9 +71,6 @@ Atributes:
     # def importDataKey(self, records):
     #     records.find_one({'key': value})
 
-    ##Push data to MondoDB
-    # def updateDocument(self, records):
-        ##Funtion used to modify an entry on an existing Document 
 
 
         

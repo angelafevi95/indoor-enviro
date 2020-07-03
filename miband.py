@@ -4,12 +4,12 @@ from datetime import datetime
 from mongoDB import mongoDB
 
 ## CSV Information about the monitored user. 
-userData = 'SLEEP_USER1.csv'
+userData = 'SLEEP_DATA.csv'
 
 class miband(): 
 
     def read_sleep_info(self):
-
+        collectionSleep = {}
         month = []
         with open(userData, mode='r') as csv_file:
             csv_reader = csv.DictReader(csv_file)
@@ -19,25 +19,26 @@ class miband():
                 if line_count == 0:
                     print(f'Sleep data obtained is {", ".join(day)}')
                     line_count = +1
+                
+                else:
+                    deepHours = int(day['deepSleepTime'])/60
+                    shallowHours =  int(day['shallowSleepTime'])/60
 
-                payload = {
-                    'datetimeSleep': day["date"],
-                    'data': {
-                        'sleepHours': self.getSleepHours(day["start"], day["stop"]),
-                        'deepSleepHours': day["deepSleepTime"]/60,
-                        'shallowSleepHours': day[["shallowSleepTime"]/60    
-                    }
-                }
+                    collectionSleep = {
+                        'datetimeSleep': day['date'],
+                        'sleepHours':self.getSleepHours(day['start'], day['stop']),
+                        'deepSleepHours':deepHours,
+                        'shallowSleepHours': shallowHours }
 
-                month.append(payload)
+                    month.append(collectionSleep)
 
                 
-      return month
+        return month
 
     def getSleepHours(self, start, stop):
-        sleepSeconds = stop-start
-        sleepHours   =  datetime.fromtimestamp(sleepSeconds)    
-    
+        sleepSeconds = int(stop)- int(start)
+        sleepHours   =  (sleepSeconds/60)/60
+        print(sleepHours)
         return sleepHours 
 
 
@@ -46,4 +47,8 @@ database  = mongoDB()
 
 monthlyInfo = mibandata.read_sleep_info()
 records = database.records
-database.exportData(monthlyInfo, records)
+
+for day in monthlyInfo:
+    database.exportData(day, records)
+
+print("yata")
