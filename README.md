@@ -51,6 +51,3 @@ When it is needed to upload sleep information on MongoDB we need to:
 
 Angela Fernandez Vilches  | Universidad de Granada | Trabajo Fin de Grado|
 Diseño de nodos inalámbricos para la monitorización de las condiciones ambientales de trabajo | 2020 
-=======
-# indoor-enviro
->>>>>>> f8de5c2878293cc4eea0864d08722707aab1640f
